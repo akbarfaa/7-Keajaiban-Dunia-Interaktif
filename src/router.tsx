@@ -7,7 +7,6 @@ export const getRouter = () => {
 
   const router = createRouter({
     routeTree,
-    basepath: '/7-Keajaiban-Dunia-Interaktif/',
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,

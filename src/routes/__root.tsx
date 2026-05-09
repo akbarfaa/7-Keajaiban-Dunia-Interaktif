@@ -4,11 +4,8 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
 import { LanguageProvider } from "@/context/LanguageContext";
 import { ProgressProvider } from "@/context/ProgressContext";
 import { Navbar } from "@/components/Navbar";
@@ -58,54 +55,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "WonderSphere — Interactive Journey Through The 7 Wonders" },
-      {
-        name: "description",
-        content:
-          "A cinematic, bilingual exploration of the 7 Wonders of the World — interactive globe, culture, history, documentaries, and quizzes.",
-      },
-      { name: "author", content: "WonderSphere" },
-      { property: "og:title", content: "WonderSphere — Interactive Journey Through The 7 Wonders" },
-      {
-        property: "og:description",
-        content: "Spin the globe, explore wonders, listen to cultures, and earn your traveler's passport.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
